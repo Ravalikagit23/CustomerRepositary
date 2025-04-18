@@ -1,4 +1,4 @@
-package com.nit.model;
+package com.nit.entity;
 
 public class ContactDetails {
     private String email;

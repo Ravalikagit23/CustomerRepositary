@@ -1,25 +1,17 @@
-package com.nit.model;
+package com.nit.entity;
+
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
 public class Customer {
+    @Id
     private String customerId;
     private String firstName;
     private String lastName;
-    private List<Account> accounts;
     private ContactDetails contactDetails;
+    List<String> accounts;
     private Address address;
-
-
-    public Customer(String customerId, String firstName, String lastName, List<Account> accounts, ContactDetails contactDetails, Address address) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.accounts = accounts;
-        this.contactDetails = contactDetails;
-        this.address = address;
-    }
-
 
     public String getCustomerId() {
         return customerId;
@@ -45,20 +37,20 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
     public ContactDetails getContactDetails() {
         return contactDetails;
     }
 
     public void setContactDetails(ContactDetails contactDetails) {
         this.contactDetails = contactDetails;
+    }
+
+    public List<String> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<String> accounts) {
+        this.accounts = accounts;
     }
 
     public Address getAddress() {

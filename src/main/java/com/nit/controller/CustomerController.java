@@ -1,11 +1,10 @@
 package com.nit.controller;
 
 
-import com.nit.model.Customer;
-import com.nit.service.ICustomerServiceImpl;
+import com.nit.entity.Customer;
+import com.nit.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private ICustomerServiceImpl customerService;
+    private CustomerServiceImpl customerService;
 
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
@@ -24,22 +23,22 @@ public class CustomerController {
         return new ResponseEntity<Customer>(customer1, HttpStatus.CREATED);
     }
 
-    @GetMapping("{customerId}")
+    @GetMapping("/{customerId}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable String customerId) {
         Customer customer = customerService.getCustomerById(customerId);
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
-    @PutMapping("{customerId}")
+    @PutMapping("/{customerId}")
     public ResponseEntity<?> updateCustomerById(@RequestBody Customer customer, @PathVariable String customerID) {
         customerService.UpdateCustomer(customer);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @DeleteMapping("{customerId}")
+    @DeleteMapping("/{customerId}")
     public ResponseEntity<?> deleteByCustomerById(@PathVariable String customerId) {
-        customerService.deleteCustomerById(customerId);
-        return new ResponseEntity<>(customerId, HttpStatus.OK);
+        customerService.deleteByCustomerId(customerId);
+        return new ResponseEntity<>(customerId+ "Id was Deleted" , HttpStatus.OK);
     }
 
     @GetMapping
