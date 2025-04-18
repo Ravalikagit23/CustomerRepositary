@@ -1,6 +1,6 @@
 package com.nit.service;
 
-import com.nit.model.Customer;
+import com.nit.entity.Customer;
 import com.nit.repositary.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ICustomerServiceImpl  implements CustomerService{
+public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private CustomerRepo customerRepo;
@@ -20,7 +20,7 @@ public class ICustomerServiceImpl  implements CustomerService{
 
     @Override
     public Customer getCustomerById(String customerId) {
-      Optional <Customer >customerOptional=customerRepo.findById(customerId);
+      Optional <Customer >customerOptional=customerRepo.findByCustomerId(customerId);
 
       return customerOptional.orElseThrow(()-> new IllegalArgumentException("Customer With Id"
                 +customerId+"was Not found"));
@@ -32,13 +32,15 @@ public class ICustomerServiceImpl  implements CustomerService{
     }
 
     @Override
-    public void deleteCustomerById(String customerId) {
-       customerRepo.deleteById(customerId);
+    public void deleteByCustomerId(String customerId) {
+
+        customerRepo.deleteByCustomerId(customerId);
     }
 
     @Override
     public void UpdateCustomer(Customer customer) {
-    customerRepo.save(customer);
+
+        customerRepo.save(customer);
     }
 
     @Override
